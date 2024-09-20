@@ -1,8 +1,11 @@
 package com.applitools.demo;
 
 import static org.junit.jupiter.api.Assertions.*;
+import org.slf4j.*;
 
 public class TestMethods extends BaseTest{
+
+    protected static final Logger logger = LoggerFactory.getLogger(TestMethods.class);
 
     //valid login page test method
     protected void loginPageTest(LoginPage loginPage){
@@ -14,8 +17,12 @@ public class TestMethods extends BaseTest{
         loginPage.inputUserData();
         //input username
         loginPage.inputUsername();
+        //log the login username
+        logger.info("Used login username: " + loginPage.getUserName());
         //input password
         loginPage.inputPassword();
+        //log the login password
+        logger.info("Used login password: " + loginPage.getPassword());
         //click 'remember me' checkbox
         loginPage.clickRememberMeCheckbox();
         //click sign-in button
