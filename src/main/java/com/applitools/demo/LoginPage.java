@@ -27,9 +27,35 @@ public class LoginPage extends BasePage{
     @FindBy(xpath = "//a[@href='#']")
     private List<WebElement> socialIconsButtonElements;
 
+    //login data variables
+    private String username;
+    private String password;
 
     public LoginPage(WebDriver driver) {
         super(driver);
+    }
+
+    //login data input getter
+    public void inputUserData(){
+        username = TestDataGenerator.generateRandomUsername(6);
+        password = TestDataGenerator.generateRandomPassword();
+
+        System.out.println("Generated data for login: " + "\n");
+        logger.info("Username: " + username);
+        logger.info("Password: " + password);
+    }
+
+    //sign-in button click method
+    public void inputUsername() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(usernameInputField));
+        usernameInputField.sendKeys(username);
+    }
+    //sign-in button click method
+    public void inputPassword() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(passwordInputField));
+        passwordInputField.sendKeys(password);
     }
 
     //sign-in button click method
@@ -63,4 +89,8 @@ public class LoginPage extends BasePage{
 
     //login page header text getter
     public String getLoginPageHeaderText(){return loginPageHeader.getText();}
+
+    //login data getters
+    public String getUserName(){return username;}
+    public String getPassword(){return password;}
 }
