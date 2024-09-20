@@ -49,20 +49,20 @@ public class LoginPage extends BasePage{
         logger.info("Password: " + password);
     }
 
-    //sign-in button click method
+    //input username method
     public void inputUsername() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
         wait.until(ExpectedConditions.visibilityOf(usernameInputField));
         usernameInputField.sendKeys(username);
     }
-    //sign-in button click method
+    //input password method
     public void inputPassword() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
         wait.until(ExpectedConditions.visibilityOf(passwordInputField));
         passwordInputField.sendKeys(password);
     }
 
-    //invalid login data input getter
+    //invalid login data input getter (no username)
     public void inputUserDataWithNoUsername(){
         noUsername = "";
         password = TestDataGenerator.generateRandomPassword();
@@ -72,11 +72,28 @@ public class LoginPage extends BasePage{
         logger.info("Password: " + password);
     }
 
-    //sign-in button click method
+    //input username method
     public void inputNoUsername() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
         wait.until(ExpectedConditions.visibilityOf(usernameInputField));
         usernameInputField.sendKeys(noUsername);
+    }
+
+    //invalid login data input getter (no username)
+    public void inputUserDataWithNoPassword(){
+        username = TestDataGenerator.generateRandomUsername(6);
+        noPassword = "";
+
+        System.out.println("Generated data for login: " + "\n");
+        logger.info("Username: " + username);
+        logger.info("No password: " + noPassword);
+    }
+
+    //input password method
+    public void inputNoPassword() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(usernameInputField));
+        usernameInputField.sendKeys(noPassword);
     }
 
     //sign-in button click method

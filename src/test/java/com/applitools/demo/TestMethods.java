@@ -27,9 +27,12 @@ public class TestMethods extends BaseTest{
         loginPage.clickRememberMeCheckbox();
         //click sign-in button
         loginPage.clickSignInButton();
+        UserDashboardPage userDashboardPage = new UserDashboardPage(driver);
+        //assert the acme page logo label is displayed as expected
+        assertEquals("ACME", userDashboardPage.getAcmePageLogoLabelText(), "The acme page logo label isn't displayed");
     }
 
-    //invalid login page test method
+    //invalid login page test method (no username)
     protected void loginPageNoUsernameTest(LoginPage loginPage){
         //web element assert
         isLoginPageWebElementDisplayed(loginPage);
@@ -43,6 +46,36 @@ public class TestMethods extends BaseTest{
         loginPage.inputPassword();
         //click sign-in button
         loginPage.clickSignInButton();
+        UserDashboardPage userDashboardPage = new UserDashboardPage(driver);
+        //log the error if the user logs in without username
+        if(userDashboardPage.getAcmePageLogoLabelText().equals("ACME") || userDashboardPage.isAcmePageLogoLabelDisplayed()){
+            logger.error("The user has logged in without the username");
+        }else{
+            logger.info("The user hasn't logged in without the username");
+        }
+    }
+
+    //invalid login page test method (no password)
+    protected void loginPageNoPasswordTest(LoginPage loginPage){
+        //web element assert
+        isLoginPageWebElementDisplayed(loginPage);
+        //assert the login header has the expected text
+        assertEquals("Login Form", loginPage.getLoginPageHeaderText(), "The login page header text doesn't match expectations");
+        //input user data getter
+        loginPage.inputUserDataWithNoPassword();
+        //input username
+        loginPage.inputUsername();
+        //omit to input password
+        loginPage.inputNoPassword();
+        //click sign-in button
+        loginPage.clickSignInButton();
+        UserDashboardPage userDashboardPage = new UserDashboardPage(driver);
+        //log the error if the user logs in without username
+        if(userDashboardPage.getAcmePageLogoLabelText().equals("ACME") || userDashboardPage.isAcmePageLogoLabelDisplayed()){
+            logger.error("The user has logged in without the password");
+        }else{
+            logger.info("The user hasn't logged in without the password");
+        }
     }
 
     //login page web element assert

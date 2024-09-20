@@ -22,4 +22,13 @@ public class LoginPageTest extends TestMethods{
         loginPageNoUsernameTest(loginPage);
     }
 
+    //Test 001b - invalid user login test (no password)
+    @Test
+    @DisplayName("Invalid Login Test - No Password")
+    @Tag("Invalid_User_Login")
+    void invalidLoginNoPasswordTest(){
+        LoginPage loginPage = new LoginPage(driver);
+        loginPageNoPasswordTest(loginPage);
+    }
+
 }
