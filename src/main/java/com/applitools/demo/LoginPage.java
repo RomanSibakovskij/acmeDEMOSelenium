@@ -31,6 +31,10 @@ public class LoginPage extends BasePage{
     private String username;
     private String password;
 
+    //invalid login data variables
+    private String noUsername;
+    private String noPassword;
+
     public LoginPage(WebDriver driver) {
         super(driver);
     }
@@ -56,6 +60,23 @@ public class LoginPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
         wait.until(ExpectedConditions.visibilityOf(passwordInputField));
         passwordInputField.sendKeys(password);
+    }
+
+    //invalid login data input getter
+    public void inputUserDataWithNoUsername(){
+        noUsername = "";
+        password = TestDataGenerator.generateRandomPassword();
+
+        System.out.println("Generated data for login: " + "\n");
+        logger.info("No username: " + noUsername);
+        logger.info("Password: " + password);
+    }
+
+    //sign-in button click method
+    public void inputNoUsername() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        wait.until(ExpectedConditions.visibilityOf(usernameInputField));
+        usernameInputField.sendKeys(noUsername);
     }
 
     //sign-in button click method

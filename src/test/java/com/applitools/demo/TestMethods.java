@@ -29,6 +29,22 @@ public class TestMethods extends BaseTest{
         loginPage.clickSignInButton();
     }
 
+    //invalid login page test method
+    protected void loginPageNoUsernameTest(LoginPage loginPage){
+        //web element assert
+        isLoginPageWebElementDisplayed(loginPage);
+        //assert the login header has the expected text
+        assertEquals("Login Form", loginPage.getLoginPageHeaderText(), "The login page header text doesn't match expectations");
+        //input user data getter
+        loginPage.inputUserDataWithNoUsername();
+        //omit to input username
+        loginPage.inputNoUsername();
+        //input password
+        loginPage.inputPassword();
+        //click sign-in button
+        loginPage.clickSignInButton();
+    }
+
     //login page web element assert
     protected void isLoginPageWebElementDisplayed(LoginPage loginPage){
         //assert the login page header is displayed
